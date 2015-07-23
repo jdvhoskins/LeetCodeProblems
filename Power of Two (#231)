@@ -1,0 +1,10 @@
+// Determine if the input is a power of two.
+// A number in binary will only have one set bit, even 2^0.
+
+class Solution {
+public:
+    bool isPowerOfTwo(int n) {
+        bitset<64> bit(n);
+        return bit.count()==1;
+    }
+};
