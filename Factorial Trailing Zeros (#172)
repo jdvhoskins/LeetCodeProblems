@@ -1,0 +1,19 @@
+// Find the number of trailing zeros in n!.
+// Note: for every factor of 5 in n! there must also be a fector of 2.
+
+class Solution {
+public:
+    int trailingZeroes(int n) {
+        if (n==0) return 0;
+        
+//        int power=(int) log(n)/log(5);
+        int ans=0;
+        
+        do{
+            ans+=n/5;
+            n=n/5;
+        }while(n>0);
+        
+        return ans;
+    }
+};

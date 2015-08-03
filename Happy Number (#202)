@@ -1,0 +1,40 @@
+/*
+Determine if a number is "happy". For a number to be happy, the
+sum of the squares of its digits must be either 1 or also a happy
+number. For an unhappy number, this condition on the sum will
+eventually form a loop. In general, summing the squeares of the
+digits leads to a reduction in the order of magnitude of the
+number. This will eventually reduce to a single digit. Of the
+single digit numbers, only 1 and 7 are happy.
+*/
+
+
+class Solution {
+public:
+    bool isHappy(int n) {
+        if (n==NULL) return false;
+        if (n==0) return false;
+        if (n==1 || n==7) return true;
+
+        do{
+            n=sumSquares(n);
+        }while(n>9);
+        
+        if (n==1 || n==7) return true;
+        else return false;
+        
+    }
+    
+    int sumSquares(int n){
+        int sum=0;
+        int r;
+        
+        do{
+            r=n%10;
+            sum+=r*r;
+            n=n/10;
+        }while(n!=0);
+        
+        return sum;
+    }
+};

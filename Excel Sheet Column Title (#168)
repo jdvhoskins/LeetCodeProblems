@@ -1,0 +1,29 @@
+// Convert a column number to the column title in Excel.
+// Note: A:Z in ascii is 65:90, and a:z is 97:122.
+
+class Solution {
+public:
+    string convertToTitle(int n) {
+
+        string s, ans;
+
+        do{
+            if(n%26==0){
+                s.push_back('Z');
+                n-=26;
+                n/=26;
+            }
+            else{
+                s.push_back((char) (n%26+64));
+                n/=26;
+            }
+        }while(n!=0);
+        
+        do{
+            ans.push_back(s.back());
+            s.pop_back();
+        }while(s.size()!=0);
+        
+        return ans;
+    }
+};

@@ -1,0 +1,30 @@
+// Determine the lowest node in a binary search tree for which the
+// two given nodes are both descendants. Here, a node is allowed
+// to be it's own descendant.
+
+
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if(!root) return nullptr;
+        if(root==p || root==q) return root;
+
+        if(p->val>q->val) swap(p,q);
+        if(root->val>p->val && root->val<q->val) return root;
+
+        else if (root->val>p->val) root = lowestCommonAncestor(root->left, p, q);
+        else root = lowestCommonAncestor(root->right, p, q);
+        
+        return root;
+    }
+};

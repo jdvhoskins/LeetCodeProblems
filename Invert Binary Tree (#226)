@@ -1,0 +1,41 @@
+// Invert a binary tree. That is all.
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* invertTree(TreeNode* root) {
+        if (!root) return root;
+        if (!root->left && !root->right) return root;
+        
+        vector<TreeNode*> list;
+        
+        FlipNode(root);
+        if (root->left!=NULL) list.push_back(root->left);
+        if (root->right!=NULL) list.push_back(root->right);
+        
+        for(int i=0; i<list.size(); i++){
+            FlipNode(list[i]);
+            if (list[i]->left!=NULL) list.push_back(list[i]->left);
+            if (list[i]->right!=NULL) list.push_back(list[i]->right);
+        }
+
+        return root;
+        
+    }
+    
+    void FlipNode(TreeNode* node){
+        if (node!=NULL){
+            TreeNode* temp=node->left;
+            node->left=node->right;
+            node->right=temp;
+        }
+    }
+};

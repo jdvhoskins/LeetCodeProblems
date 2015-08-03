@@ -1,0 +1,51 @@
+// Sum all the values in a binary tree along each path from root to leaf.
+// Check if any match the desired sum.
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool hasPathSum(TreeNode* root, int sum) {
+        if(!root) return false;
+        
+        int count=0;
+        vector<TreeNode*> list (1,root);
+        vector<int> nums;
+        TreeNode* node=NULL;
+        
+        do{
+            node = list[count];
+            
+            if (!node){
+                count++;
+            }
+            else{
+                if(node->left !=NULL){
+                    node->left->val+=node->val;
+                    list.push_back(node->left);
+                }
+                if(node->right !=NULL){
+                    node->right->val+=node->val;
+                    list.push_back(node->right);
+                }
+                
+                if(!node->left && !node->right) nums.push_back(node->val);
+                
+                count++;
+            }
+        }while(count<list.size());
+        
+        for (int i=0; i<nums.size(); i++){
+            if(nums[i]==sum) return true;
+        }
+        
+        return false;
+    }
+};

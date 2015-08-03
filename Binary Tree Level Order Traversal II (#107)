@@ -1,0 +1,52 @@
+// Output a vector of the rows of a binary tree from bottom to top.
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    vector<vector<int>> levelOrderBottom(TreeNode* root) {
+        vector<vector<int>> ans;
+        vector<vector<int>> temp;
+        vector<int> row;
+        
+        if(!root) return ans;
+        
+        vector<TreeNode*> list (1, root);
+        vector<TreeNode*> next;
+        int count;
+        TreeNode* node;
+        
+        do{
+            next.clear();
+            count=0;
+            row.clear();
+            
+            do{
+                node = list[count];
+    
+                row.push_back(node->val);
+                if(node->left!=NULL) next.push_back(node->left);
+                if(node->right!=NULL) next.push_back(node->right);
+                count++;
+            }while(count<list.size());
+            
+            list=next;
+            temp.push_back(row);
+            
+        }while(next.size()>0);
+        
+        while(temp.size()>0){
+            ans.push_back(temp.back());
+            temp.pop_back();
+        }
+        
+        return ans;   
+    }
+};

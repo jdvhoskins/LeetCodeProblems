@@ -1,0 +1,23 @@
+// Determine if a vector contains any repeated values spaced
+// no farther apart than k indicies.
+
+class Solution {
+public:
+    bool containsNearbyDuplicate(vector<int>& nums, int k) {
+        if(nums.size()==0 || k==0) return false;
+	
+        if (k>=nums.size()-1){
+            set<int> s (nums.begin(),nums.end());
+            
+            if (s.size()!=nums.size()) return true;
+            else return false;
+        }
+        else{
+            for(int i=0; i+k<nums.size(); i++){
+                set<int> s (nums.begin()+i, nums.begin()+i+k+1);
+                if (s.size()!=k+1) return true;
+            }
+            return false;
+        }
+    }
+};

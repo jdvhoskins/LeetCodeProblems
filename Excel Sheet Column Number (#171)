@@ -1,0 +1,19 @@
+// Convert the column title in Excel to the column number.
+// Note: A:Z in ascii is 65:90, and a:z is 97:122.
+
+class Solution {
+public:
+    int titleToNumber(string s) {
+        int size=s.size();
+        int power=1;
+        int ans=0;
+        
+        for(int i=0; i<size; i++){
+            ans+=power*(s.back()-64);
+            power*=26;
+            s.pop_back();
+        }
+        
+        return ans;
+    }
+};

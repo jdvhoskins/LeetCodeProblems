@@ -1,0 +1,43 @@
+// Given an ordered list of ints, return a vector of strings for the ranges.
+// eg  [1,2,3,4,8,9,10,12] yields ["1->4","8->10","12"]
+
+class Solution {
+public:
+    vector<string> summaryRanges(vector<int>& nums) {
+        vector<string> ans;
+
+        if(nums.empty()) return ans;
+
+        if(nums.size()==1){
+            ans.push_back(to_string(nums[0]));
+            return ans;
+        }
+        else{
+            vector<int> start, stop;
+            
+            start.push_back(nums[0]);
+            stop.push_back(nums[0]);
+            
+            for(int i=1; i<nums.size(); i++){
+                if(nums[i]==nums[i-1]+1){
+                    stop.back()=nums[i];
+                } 
+                else{
+                    stop.back()=nums[i-1];
+                    start.push_back(nums[i]);
+                    stop.push_back(nums[i]);
+                }
+            }
+            
+            for(int i=0; i<start.size(); i++){
+                if (start[i]==stop[i]){
+                    ans.push_back(to_string(stop[i]));
+                }
+                else{
+                    ans.push_back(to_string(start[i]) + "->" + to_string(stop[i]));
+                }
+            }
+            return ans;
+        }
+    }
+};

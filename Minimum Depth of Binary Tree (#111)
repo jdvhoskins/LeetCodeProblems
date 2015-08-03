@@ -1,0 +1,26 @@
+// Determine the minimum root to leaf distance in a binary tree. 
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int minDepth(TreeNode* root) {
+        if (!root) return 0;
+        
+        return CountNodes(root);
+    }
+
+    int CountNodes(TreeNode* node){
+        if (!node->left && !node->right) return 1;
+        else if(node->left==NULL) return CountNodes(node->right)+1;
+        else if(node->right==NULL) return CountNodes(node->left)+1;
+        else return min(CountNodes(node->right),CountNodes(node->left))+1;
+    }
+};

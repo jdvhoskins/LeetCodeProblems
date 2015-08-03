@@ -1,0 +1,12 @@
+// Determine if a vector contains any repeated values.
+
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        if(nums.size()==0) return false;
+        
+        set<int> s (nums.begin(),nums.end());
+        if (s.size()!=nums.size()) return true;
+        else return false;
+    }
+};
